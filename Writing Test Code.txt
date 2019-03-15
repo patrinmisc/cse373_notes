@@ -1,0 +1,15 @@
+### Test Categories ###
+1. EXPECTED BEHAVIOR
+    Does your code do what it should in friendly/general situations?
+
+2. BOUNDARY/EDGE
+    Does adding the first item/last item/full collection break it?
+
+3. FORBIDDEN INPUT
+    Does it work when people try to break your code w/ inputs?
+
+4. EMPTY/NULL
+    Does it work if it's empty/null?  If its parameters are empty/null?
+
+5. SCALE
+    Test with 1, 10, 100, 10000 inputs
