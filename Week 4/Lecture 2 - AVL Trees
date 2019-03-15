@@ -1,0 +1,50 @@
+/* ### LECTURE 2 AVL TREES ###
+AVL Insert Time = BST Insert Time + time required to rebalance the tree
+				= O(log n) + time it takes to rebalance hte tree
+
+So how long does rebalancing take?
+- Assume we store each node's subtree height in the node.
+
+AVLs
+Pros: 
+- O(log n) is the worst case for find, insert, and delete operations
+- Reliable runtimes
+
+// ======================================
+Hashing
+Dictionaries are incredibly efficient ways to deal with data.
+Databases are very commonly implemented as dictionaries
+
+What if we tried to implement a dictionary that only accepts integer keys
+between some value 0 and k.
+DirectAccessMap<Integer, V>
+put, get, and remove all run at constant time
+
+First hash function: % table size
+incices:	0	1	2	3	4	5	6	7	8	9
+elements: 
+*/
+put (0, "foo"); // 0 % 10 = 0, so this goes at index 0
+put (11, "spice"); // 11 % 10 = 1, so this goes at index 1 
+/*
+Collisions: When multiple keys translate to the same location of the array
+The fewer collisions, the better the array
+
+// =====================================
+Strategies to handle hash collision
+1. Separate chaining
+2. Open addressing
+- Linear probing
+3. Double hashing
+
+SEPARATE CHAINING
+Each space holds a "bucket" that can store multiple values, often implemented
+with a LinkedList.  So your values are datastructures and every time you put
+something in index 1, it gets added to the LinkedList at index 1
+
+Best runtime: O(1)
+Average runtime: O(1 + lambda)
+Worst runtime: O(n)
+
+lambda = n / c // n is total number of things being stored, 
+			   // c is capacity of the array

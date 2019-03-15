@@ -1,0 +1,68 @@
+/* ### LECTURE 7 SOLVING RECURRENCES ### */
+public int factorial (int n) {
+	if (n == 0 || n == 1) {
+		return 1;
+	}
+}
+/* Solving Recurrences
+How do we go from code model to big O?
+1. Explore the recursive pattern by stepping thru the first few levels of recurs.
+2. Write a new model of the run time of each level of recursion in terms of `i`
+3. Use algebra (prob. summation) to simplify the T recursive call to a Big O
+4. No summations, no recurrences 
+
+// =============================
+THE UNROLLING METHOD.
+find the closed form.
+T(n) { 4 when n = 0, 1
+	 { 2 + T(n-1) otherwise
+
+1. Assume you have a big T(n), which means using the biggest condition
+2. On your second recursion, plug in the equation again to the equation
+T(n) = 2 + 2 + T(n - 1 - 1)
+T(n) = 2 + 2 + T(n - 2) ------> T(n) = 2 + 2 + 2 + T(n-2 - 1) // and so on.
+T(n) = 2 + 2 + 2 + 2 + T(n - 3 - 1)
+3. Identify the pattern. `i` is going to equal the level of recursion youre at.
+T(n - i) = T(1) when i = n - 1
+T(n) = 4 + summation(i = 1 until n - 1, of 2)
+4. Summation identity
+if you're summing c a total of n times, your answer is just c * n.
+2 * (n - 1) = 4 + 2(n - 1)
+
+Example.
+T(n) { 1 when n = 0
+	 { 2T(n - 1) + 1 otherwise
+
+1. 2T(n - 1) + 1
+2. 2(2T(n - 1) + 1 - 1) ----> 4T(n - 1) + 2 - 2
+3. 8T(n - 1) - 1 + 1) + 2 - 2
+4. (2^i)T(n - 1)
+
+1. i = 1 = 2T(n - 1) + 1
+2. i = 2 = 2(2T(n - 2) + 1) + 1 -----> i = 2 = 2^2 T(n - 2) + 2 + 1
+3. i = 3 = 2^2 * (2T(n - 3) + 1) + 2 + 1
+
+// =============================
+TREE METHOD.  Draw out the call stack.  How much work is each call doing
+T(n) { 1 when n <= 1
+	 { 2T(n/2) + n
+
+1. Draw overall root representing the start of your recursive calls
+T(n/2) + T(n/2) + n
+2. Plug in the equation again for T(n/2)
+3. How many nodes are there in each level of the tree?
+Goes from 1 to 2 to 4 to 8 to n
+4. How much work is done by each recursive call?
+Goes from n to n/2 to n/4 to n/8 to 1
+Summing the work of every node on a level: goes from n to n to n to n to n
+
+TREE METHOD FORMULAE
+How much work is done by recursive levels (branch nodes?)
+1. How many recursive calls are on the i-th level of the tree?
+	numberNodesPerLevel(i) = 2^i
+2. At each level i, how many inputs does a single node process?
+	inputsPerRecursiveCall(i) = (n/(2^i))
+3. How many recursive levels are there?
+	branchCount = log(n) - 1
+Recursive work = summation(from 0 to branchCount of branchNum(i) * branchWork(i))
+T(n > 1) = sum
